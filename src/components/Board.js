@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Panel from './Panel';
+import { WINNING_SCORE } from './Main';
 
 const Board = (props) => {
-    const { score, incrementScore, setIsGameOver, setBestScore } = props;
+    const { score, isGameOver, setScore, setIsGameOver } = props;
+    // implement this if you want to (having multiple cards 9+)
+    const [clickedIndices, setClickedIndices] = useState([]);
     const [clicked, setClicked] = useState([]); 
     const classNames = [{class: 'fa-react', text: 'React'}, 
                         {class: 'fa-js', text: 'JS'}, 
@@ -13,9 +16,9 @@ const Board = (props) => {
                         {class: 'fa-r-project', text: 'R'}, 
                         {class: 'fa-swift', text: 'Swift'}, 
                         {class: 'fa-golang', text: 'Go'},
-                        {class: 'fa-apple', text: 'Apple'},
-                        {class: 'fa-android', text: 'Android'},
-                        {class: 'fa-amazon', text: 'Amazon'}
+                        // {class: 'fa-amazon', text: 'Amazon'},
+                        // {class: 'fa-google', text: 'Google'},
+                        // {class: 'fa-apple', text: 'Apple'},
                        ]
     
     const generateNineUniqueNums = () => {
@@ -23,7 +26,7 @@ const Board = (props) => {
         let num;
 
         while (nums.length < 9) {
-            num = Math.floor(Math.random() * (11 - 0 + 1)) + 0;
+            num = Math.floor(Math.random() * ((WINNING_SCORE - 1) - 0 + 1)) + 0;
 
             if (!nums.includes(num)) {
                 nums.push(num);
@@ -37,29 +40,33 @@ const Board = (props) => {
 
     const appendClicked = (className) => {
         let currentClicked = clicked;
+        let currentScore = score;
 
-        if (!currentClicked.includes(className)) {
+        if (!currentClicked.includes(className) && !isGameOver) {
             currentClicked.push(className);
-            incrementScore();
+            setScore(currentScore + 1);
             setClicked(currentClicked);
+            if (score >= (WINNING_SCORE - 1)) {
+                setIsGameOver(true);
+            }
             nums = generateNineUniqueNums();
         } else {
             setIsGameOver(true);
-            setBestScore(score);
+            setClicked([]);
         }
     }
 
     return (
         <div id='board'>
-            <Panel appendClicked={appendClicked} brand={classNames[nums[0]]} />
-            <Panel brand={classNames[nums[1]]} />
-            <Panel brand={classNames[nums[2]]} />
-            <Panel brand={classNames[nums[3]]} />
-            <Panel brand={classNames[nums[4]]} />
-            <Panel brand={classNames[nums[5]]} />
-            <Panel brand={classNames[nums[6]]} />
-            <Panel brand={classNames[nums[7]]} />
-            <Panel brand={classNames[nums[8]]} />
+            <Panel appendClicked={appendClicked} brand={classNames[nums[0]]} isGameOver={isGameOver}/>
+            <Panel appendClicked={appendClicked} brand={classNames[nums[1]]} isGameOver={isGameOver}/>
+            <Panel appendClicked={appendClicked} brand={classNames[nums[2]]} isGameOver={isGameOver}/>
+            <Panel appendClicked={appendClicked} brand={classNames[nums[3]]} isGameOver={isGameOver}/>
+            <Panel appendClicked={appendClicked} brand={classNames[nums[4]]} isGameOver={isGameOver}/>
+            <Panel appendClicked={appendClicked} brand={classNames[nums[5]]} isGameOver={isGameOver}/>
+            <Panel appendClicked={appendClicked} brand={classNames[nums[6]]} isGameOver={isGameOver}/>
+            <Panel appendClicked={appendClicked} brand={classNames[nums[7]]} isGameOver={isGameOver}/>
+            <Panel appendClicked={appendClicked} brand={classNames[nums[8]]} isGameOver={isGameOver}/>
         </div>
     )
 }

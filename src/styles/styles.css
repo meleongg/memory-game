@@ -27,14 +27,33 @@ header {
   width: 100%;
 }
 
+/* Banner */
 #banner {
   grid-column: 2 / -1;
-  height: 70px;
+  height: 100px;
   width: 100%;
   display: grid;
   justify-items: center;
   align-items: center;
   grid-template-columns: repeat(2, 1fr);
+}
+
+#game-state-container {
+  display: grid;
+  grid-template-rows: repeat(1fr, 2);
+  row-gap: 10px;
+  justify-items: center;
+  align-content: center;
+}
+
+#play-again-btn {
+  width: 100px;
+  border: none;
+  padding: 6px;
+}
+
+button:hover {
+  cursor: pointer;
 }
 
 /* Board */

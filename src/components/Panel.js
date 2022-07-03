@@ -1,13 +1,15 @@
 import React from 'react';
 
 const Panel = (props) => {
-    const { appendClicked, brand } = props;
+    const { appendClicked, brand, isGameOver } = props;
 
     const handleClick = (e) => {
-        if (e.target.nodeName !== 'DIV') {
-            appendClicked(e.target.parentElement.children[0].className);
-        } else {
-            appendClicked(e.target.children[0].className);
+        if (!isGameOver) {
+            if (e.target.nodeName !== 'DIV') {
+                appendClicked(e.target.parentElement.children[0].className);
+            } else {
+                appendClicked(e.target.children[0].className);
+            }
         }
     }
 
