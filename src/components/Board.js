@@ -4,8 +4,6 @@ import { WINNING_SCORE } from './Main';
 
 const Board = (props) => {
     const { score, isGameOver, setScore, setIsGameOver } = props;
-    // implement this if you want to (having multiple cards 9+)
-    const [clickedIndices, setClickedIndices] = useState([]);
     const [clicked, setClicked] = useState([]); 
     const classNames = [{class: 'fa-react', text: 'React'}, 
                         {class: 'fa-js', text: 'JS'}, 
@@ -16,9 +14,6 @@ const Board = (props) => {
                         {class: 'fa-r-project', text: 'R'}, 
                         {class: 'fa-swift', text: 'Swift'}, 
                         {class: 'fa-golang', text: 'Go'},
-                        // {class: 'fa-amazon', text: 'Amazon'},
-                        // {class: 'fa-google', text: 'Google'},
-                        // {class: 'fa-apple', text: 'Apple'},
                        ]
     
     const generateNineUniqueNums = () => {
