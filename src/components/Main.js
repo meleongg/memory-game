@@ -7,6 +7,9 @@ const Main = () => {
     const [bestScore, setBestScore] = useState(0);
     const [isGameOver, setIsGameOver] = useState(false);
 
+    // TODO: render a start again button via useEffect in Main.js when isGameOver is true
+    // TODO: when button is clicked, reset score to 0 and rerandomize the panels
+
     const incrementScore = () => {
         setScore(score + 1);
     };
@@ -14,7 +17,7 @@ const Main = () => {
     return (
         <div id='main'>
             <Banner score={score} bestScore={bestScore} isGameOver={isGameOver} />
-            <Board incrementScore={incrementScore} />
+            <Board score={score} incrementScore={incrementScore} setIsGameOver={setIsGameOver} setBestScore={setBestScore} />
         </div>
     )
 }

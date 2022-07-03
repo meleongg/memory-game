@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Panel from './Panel';
 
 const Board = (props) => {
-    const { incrementScore } = props;
+    const { score, incrementScore, setIsGameOver, setBestScore } = props;
     const [clicked, setClicked] = useState([]); 
     const classNames = [{class: 'fa-react', text: 'React'}, 
                         {class: 'fa-js', text: 'JS'}, 
@@ -17,7 +17,7 @@ const Board = (props) => {
                         {class: 'fa-android', text: 'Android'},
                         {class: 'fa-amazon', text: 'Amazon'}
                        ]
-
+    
     const generateNineUniqueNums = () => {
         const nums = [];
         let num;
@@ -33,11 +33,25 @@ const Board = (props) => {
         return nums; 
     }
 
-    const nums = generateNineUniqueNums();
+    let nums = generateNineUniqueNums();
+
+    const appendClicked = (className) => {
+        let currentClicked = clicked;
+
+        if (!currentClicked.includes(className)) {
+            currentClicked.push(className);
+            incrementScore();
+            setClicked(currentClicked);
+            nums = generateNineUniqueNums();
+        } else {
+            setIsGameOver(true);
+            setBestScore(score);
+        }
+    }
 
     return (
         <div id='board'>
-            <Panel brand={classNames[nums[0]]} />
+            <Panel appendClicked={appendClicked} brand={classNames[nums[0]]} />
             <Panel brand={classNames[nums[1]]} />
             <Panel brand={classNames[nums[2]]} />
             <Panel brand={classNames[nums[3]]} />

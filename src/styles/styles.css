@@ -44,6 +44,7 @@ header {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
+  row-gap: 40px;
   justify-items: center;
   align-items: center;
 }
@@ -51,11 +52,14 @@ header {
 .panel {
   background-color: #B2B9C3;
   display: grid;
-  row-gap: 6px;
   justify-items: center;
   align-items: center;
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
+}
+
+.panel:hover {
+  cursor: pointer;
 }
 
 .panel i {
